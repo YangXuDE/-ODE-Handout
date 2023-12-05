@@ -743,5 +743,327 @@ y_p(t) = c_1(t)t^3 + c_2(t)\frac{1}{t^2}
 最终得到特解 \( y_p \)。
 
 
+\newpage
+\date{05.12.2023}
+
+
+\section{V 线性常系数微分方程}
+一般结论，线性常系数微分方程形式如下：
+\begin{equation}
+    a_n y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_1 y' + a_0 y = 0
+\end{equation}
+其中，\(a_n, a_{n-1}, \ldots, a_0\) 是常数系数。
+
+
+
+\section*{线性常系数微分方程 (Linear ODEs with constant coefficients)}
+
+我们寻找齐次解 (homogeneous solution) \( y(t) \) 满足：
+\[ a_n y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_1 y' + a_0 y = 0 \]
+其中 \( a_n, a_{n-1}, \ldots, a_1, a_0 \) 是常数系数。
+
+例如，考虑 \( y'' + a_0 y = 0 \)，
+它的通解 (general solution) 是：
+\[ y(t) = C_1 e^{\lambda_1 t} + C_2 e^{\lambda_2 t} \]
+其中 \( \lambda_1, \lambda_2 \) 是特征方程 (characteristic equation) 的根。
+
+\subsection*{单摆振子 (Simple harmonic oscillator)}
+\[ m y'' + d y' + k y = 0 \]
+其中 \( m, d, k \) 是物理常数 (physical constants)。
+
+对于无阻尼 (undamped) 情况 \( m y'' + k y = 0 \) 或 \( y'' + \omega^2 y = 0 \)，其中 \( \omega = \sqrt{\frac{k}{m}} \)。
+
+解是 (The solution is):
+\[ y(t) = C_1 \cos(\omega t) + C_2 \sin(\omega t) \]
+或者使用复数形式 (or in complex form):
+\[ y(t) = \frac{e^{i \omega t} + e^{-i \omega t}}{2} \]
+
+\subsection*{指数试探法 (Exponential ansatz)}
+考虑 \( e^{\lambda t} \) 形式的试探解，我们有特征多项式 (characteristic polynomial) \( q(\lambda) \)：
+\[ q(\lambda) = a_n \lambda^n + a_{n-1} \lambda^{n-1} + \cdots + a_1 \lambda + a_0 = 0 \]
+
+根据代数基本定理 (Fundamental theorem of algebra)，存在 \( n \) 个复数根 (complex roots) \( \lambda_1, \ldots, \lambda_n \in \mathbb{C} \)。
+
+如果 \( q(\lambda) \) 有 \( n \) 个互异根，则 \( e^{\lambda_1 t}, \ldots, e^{\lambda_n t} \) 是线性无关解 (linearly independent solutions)。
+
+
+
+\subsection*{范德蒙行列式 (Vandermonde determinant)}
+对于不同的 \( \lambda_k \) 值，我们有非零范德蒙行列式：
+\[ \begin{vmatrix}
+e^{\lambda_1 t} & e^{\lambda_2 t} & \cdots & e^{\lambda_n t} \\
+\lambda_1 e^{\lambda_1 t} & \lambda_2 e^{\lambda_2 t} & \cdots & \lambda_n e^{\lambda_n t} \\
+\vdots & \vdots & \ddots & \vdots \\
+\lambda_1^{n-1} e^{\lambda_1 t} & \lambda_2^{n-1} e^{\lambda_2 t} & \cdots & \lambda_n^{n-1} e^{\lambda_n t}
+\end{vmatrix} \neq 0 \]
+
+\subsection*{二阶常系数线性微分方程 (Second-order constant coefficient linear ODE)}
+考虑 \( y'' + \delta y' + \omega y = 0 \)，我们得到特征方程：
+\[ q(\lambda) = \lambda^2 + \delta \lambda + \omega = 0 \]
+解得 \( \lambda_1, \lambda_2 \) 可以是实数或复数。
+
+
+
+\subsection*{例子 (Example)}
+\[ y'' + \omega^2 y = 0 \]
+特征方程是 \( q(\lambda) = \lambda^2 + \omega^2 = 0 \)，解得 \( \lambda_{1,2} = \pm i \omega \)。
+
+\subsection*{复数根 (Complex zeros)}
+当系数 \( a_0, a_1, \ldots, a_{n-1}, a_n \in \mathbb{R} \) 时，根要么是实数，要么是共轭复数对。
+
+例如，\( y'' + y = 0 \) 的特征方程 \( q(\lambda) = \lambda^2 + 1 = 0 \) 有根 \( \lambda_{1,2} = \pm i \)。
+
+
+
+% ... (Continuing from previous LaTeX content)
+
+\subsection*{复根 (Complex roots)}
+设 \( \lambda = \alpha + i \beta \)，其中 \( \alpha, \beta \in \mathbb{R} \)，
+相应的解是：
+\begin{align*}
+y_1 &= e^{\lambda t} = e^{(\alpha + i \beta)t} = e^{\alpha t}(\cos(\beta t) + i\sin(\beta t)), \\
+y_2 &= e^{\bar{\lambda} t} = e^{(\alpha - i \beta)t} = e^{\alpha t}(\cos(\beta t) - i\sin(\beta t)),
+\end{align*}
+它们构成基本解系 (fundamental system)。
+
+
+
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{ctex} % 添加ctex包以支持中文
+\begin{document}
+
+Wronskian \( W(t) \) 给出为:
+\[ W(t) = \begin{vmatrix}
+e^{\lambda t} & t e^{\lambda t} \\
+\lambda e^{\lambda t} & e^{\lambda t} (1 + \lambda t) \\
+\end{vmatrix} = e^{2\lambda t} (1 + \lambda t - \lambda t) \neq 0 \]
+
+\subsection*{例子}
+\[ y'' + 4y' + 4y = 0 \]
+
+特征方程:
+\[ q(\lambda) = \lambda^2 + 4\lambda + 4 = 0 \]
+
+根:
+\[ \lambda_{1,2} = -2 \]
+
+解:
+\[ y_1 = e^{-2t} \]
+\[ y_2 = t e^{-2t} \]
+
+\[ y_2' = e^{-2t} - 2t e^{-2t} = (1 - 2t)e^{-2t} \]
+\[ y_2'' = -2e^{-2t} (1 - 2t) + (-2)e^{-2t} \]
+\[ y_2'' = (-4 + 4t)e^{-2t} \]
+
+验证解:
+\[ y_2'' + 4y_2' + 4y_2 = e^{-2t} \left[ \right] \]
+
+
+
+\subsection*{例子：}
+
+\[ y'' = 0 \]
+
+通过积分得到:
+\[ y = C_1 + C_2t \]
+
+特征方程:
+\[ q(\lambda) = \lambda^2 = 0 \]
+根:
+\[ \lambda_{1,2} = 0 \]
+
+解:
+\[ y_1 = e^{0t} = 1 \]
+\[ y_2 = t e^{0t} = t \]
+
+一般解:
+\[ y(t) = C_1 + C_2 t \]
+
+
+
+\subsection*{例子}
+\[ y' = 1 - 2y \]
+
+一阶常系数线性微分方程:
+
+齐次微分方程:
+\[ y' = -2y \]
+假设 \( y = e^{\lambda t} \), 我们得到:
+\[ y' = -2e^{\lambda t} = \lambda e^{\lambda t} \]
+因此, \( \lambda = -2 \).
+
+\( y_f = e^{-2t} \): 齐次方程的一般解为:
+\[ y_h = Ce^{-2t}, \ C \in \mathbb{R} \]
+
+非齐次微分方程:
+\[ y' = 1 - 2y \]
+\[ y_p = c(t)y_f = c(t)e^{-2t} \]
+求导得到:
+\[ c'(t)e^{-2t} - 2c(t)e^{-2t} = 1 - 2c(t)e^{-2t} \]
+解得, \( c(t) = \frac{1}{2} e^{2t} \), 因此 \( y_p = \frac{1}{2} \).
+
+一般解:
+\[ y(t) = \frac{1}{2} + Ce^{-2t}, \ C \in \mathbb{R} \]
+
+
+与这些根相关的解为:
+\begin{align*}
+y_1 &= e^{\lambda_1 t} = e^{(\alpha + i\beta)t} = e^{\alpha t}(\cos(\beta t) + i\sin(\beta t)), \\
+y_2 &= e^{\lambda_2 t} = e^{(\alpha - i\beta)t} = e^{\alpha t}(\cos(\beta t) - i\sin(\beta t)).
+\end{align*}
+
+我们考虑实函数作为基本系统:
+\begin{align*}
+v_1 &= \frac{y_1 + y_2}{2} = e^{\alpha t}\cos(\beta t), \\
+v_2 &= \frac{y_1 - y_2}{2} = e^{\alpha t}\sin(\beta t).
+\end{align*}
+
+一般解为:
+\begin{align*}
+y(t) &= C_1y_1(t) + C_2y_2(t) \in \mathbb{R} \\
+&= C_1y_1 + C_2 \overline{y_1} \\
+&= C_1(v_1 + iv_2) + C_2(v_1 - iv_2) \\
+&= (C_1 + C_2)v_1 + i(C_1 - C_2)v_2.
+\end{align*}
+
+已知 \( \ln C_1 + \ln C_2 = 0 \), 这意味着 \( ReC_1 = ReC_2 \), 因此 \( C_1 = C_2 \).
+
+令 \( C_1 = A + Bi \) 和 \( C_2 = A - Bi \), 其中 \( A, B \in \mathbb{R} \).
+
+则:
+\begin{align*}
+C_1y_1 + C_2y_2 &= (A + Bi)(v_1 + iv_2) + (A - Bi)(v_1 - iv_2) \\
+&= 2Av_1 - 2Bv_2 \in \mathbb{R}.
+\end{align*}
+
+\subsection*{例子:}
+\[ y'' + y = 0 \]
+
+特征方程:
+\[ q(\lambda) = \lambda^2 + 1 = 0 \]
+根:
+\[ \lambda_{1,2} = \pm i \]
+
+解:
+\[ y_1 = e^{it} = \cos t + i\sin t \]
+\[ y_2 = e^{-it} = \cos t - i\sin t \]
+
+实函数:
+\[ v_1 = \cos t \]
+\[ v_2 = \sin t \]
+
+一般解:
+\[ y(t) = 2A \cos t - 2B \sin t \]
+其中 \( A, B \) 是实数，代表实解。
+
+\subsection*{例子}
+\[ y'' + y' + y = 0 \]
+
+特征方程:
+\[ q(\lambda) = \lambda^2 + \lambda + 1 = 0 \]
+根:
+\[ \lambda_{1,2} = -\frac{1}{2} \pm i\frac{\sqrt{3}}{2} \]
+
+解:
+\[ y_{1,2} = e^{-\frac{1}{2}t} \left( e^{\pm i\frac{\sqrt{3}}{2}t} \right) \]
+\[ v_1 = e^{-\frac{1}{2}t} \cos\left(\frac{\sqrt{3}}{2}t\right) \]
+
+\subsection*{多重零点}
+\[ \lambda_1 = \lambda_2 = \ldots = \lambda_j \]
+因此，如果 \( y_1 = e^{\lambda t} \)，那么 \( y_2 = te^{\lambda t} \) 是线性相关的。
+
+这里，对于 \( g = 2 \)，即 \( \lambda_1 = \lambda_2 \) 是一个双重零点。
+特征多项式:
+\[ q(\lambda) = (\lambda - \lambda_1)^2 \cdot \text{rest}(\lambda) \]
+
+因此, \( q'(\lambda) = 2(\lambda - \lambda_1) \cdot \text{rest}(\lambda) + (\lambda - \lambda_1)^2 \cdot \text{rest}'(\lambda) \)
+
+因此，如果 \( \lambda \) 是 \( q \) 的双重零点，那么 \( \lambda \) 也是 \( q' \) 的零点。
+
+理论:
+如果 \( \lambda \) 是 \( q \) 的双重零点，那么 \( y_1 = e^{\lambda t} \) 和 \( y_2 = te^{\lambda t} \) 是线性独立的解。
+
+证明:
+\[ \mathcal{L} \{ t e^{\lambda t} \} = \frac{d}{d\lambda} \mathcal{L} \{ e^{\lambda t} \} = \frac{d}{d\lambda} \left[ \frac{1}{s - \lambda} \right] = \frac{1}{(s - \lambda)^2} \]
+这意味着 \( y_1 \) 和 \( y_2 \) 是线性独立的。
+
+
+Wronskian \( W(t) \) 给出为:
+\[ W(t) = \begin{vmatrix}
+e^{\lambda t} & t e^{\lambda t} \\
+\lambda e^{\lambda t} & e^{\lambda t} (1 + \lambda t) \\
+\end{vmatrix} = e^{2\lambda t} (1 + \lambda t - \lambda t) \neq 0 \]
+
+\subsection*{例子}
+\[ y'' + 4y' + 4y = 0 \]
+
+特征方程:
+\[ q(\lambda) = \lambda^2 + 4\lambda + 4 = 0 \]
+
+根:
+\[ \lambda_{1,2} = -2 \]
+
+解:
+\[ y_1 = e^{-2t} \]
+\[ y_2 = t e^{-2t} \]
+
+\[ y_2' = e^{-2t} - 2t e^{-2t} = (1 - 2t)e^{-2t} \]
+\[ y_2'' = -2e^{-2t} (1 - 2t) + (-2)e^{-2t} \]
+\[ y_2'' = (-4 + 4t)e^{-2t} \]
+
+验证解:
+\[ y_2'' + 4y_2' + 4y_2 = e^{-2t} \left[ \right] \]
+
+
+
+\subsection*{例子：}
+
+\[ y'' = 0 \]
+
+通过积分得到:
+\[ y = C_1 + C_2t \]
+
+特征方程:
+\[ q(\lambda) = \lambda^2 = 0 \]
+根:
+\[ \lambda_{1,2} = 0 \]
+
+解:
+\[ y_1 = e^{0t} = 1 \]
+\[ y_2 = t e^{0t} = t \]
+
+一般解:
+\[ y(t) = C_1 + C_2 t \]
+
+
+
+\subsection*{例子}
+\[ y' = 1 - 2y \]
+
+一阶常系数线性微分方程:
+
+齐次微分方程:
+\[ y' = -2y \]
+假设 \( y = e^{\lambda t} \), 我们得到:
+\[ y' = -2e^{\lambda t} = \lambda e^{\lambda t} \]
+因此, \( \lambda = -2 \).
+
+\( y_f = e^{-2t} \): 齐次方程的一般解为:
+\[ y_h = Ce^{-2t}, \ C \in \mathbb{R} \]
+
+非齐次微分方程:
+\[ y' = 1 - 2y \]
+\[ y_p = c(t)y_f = c(t)e^{-2t} \]
+求导得到:
+\[ c'(t)e^{-2t} - 2c(t)e^{-2t} = 1 - 2c(t)e^{-2t} \]
+解得, \( c(t) = \frac{1}{2} e^{2t} \), 因此 \( y_p = \frac{1}{2} \).
+
+一般解:
+\[ y(t) = \frac{1}{2} + Ce^{-2t}, \ C \in \mathbb{R} \]
+
+\end{document}
+
 
 \end{document}
